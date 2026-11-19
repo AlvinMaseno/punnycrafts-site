@@ -1,0 +1,238 @@
+<title>Punny Crafts Storefront</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: marketplace storefront. Promo bar, header with wide search, category strip, split hero, tile row, product grids, trust strip, footer. */
+:root{
+  --bg:#ffffff; --surface:#f6f4ee; --fg:#1c1a16; --muted:#6b665b; --line:#e4e0d4;
+  --accent:#f4b400; --accent-fg:#1c1a16; --promo-bg:#1c1a16; --promo-fg:#f4b400;
+  --t1:#f4b400; --t2:#1c1a16; --t3:#ff7a59; --t4:#2e7d6b; --t5:#e9e4d6; --t6:#8fb8e8;
+  --font-display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --font-body:"DM Sans","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14130f; --surface:#1e1c16; --fg:#f3f0e6; --muted:#a39e90; --line:#322f26;
+  --promo-bg:#f4b400; --promo-fg:#1c1a16; --t5:#3a362a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14130f; --surface:#1e1c16; --fg:#f3f0e6; --muted:#a39e90; --line:#322f26;
+  --promo-bg:#f4b400; --promo-fg:#1c1a16; --t5:#3a362a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1240px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0}
+.promo{background:var(--promo-bg);color:var(--promo-fg);text-align:center;font-weight:700;font-size:13px;padding:9px 16px;
+  margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));letter-spacing:.02em}
+header.top{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;padding-block:16px}
+.logo{font-family:var(--font-display);font-weight:800;font-size:28px;letter-spacing:-.03em;line-height:1}
+.logo span{background:var(--accent);color:var(--accent-fg);padding:2px 8px;border-radius:4px;margin-right:4px;display:inline-block;transform:rotate(-2deg)}
+form.search{display:flex;min-width:0;border:2px solid var(--fg);border-radius:999px;overflow:hidden;background:var(--bg)}
+form.search input{flex:1;min-width:0;border:0;background:transparent;color:var(--fg);padding:12px 18px;font:inherit;font-size:15px}
+form.search button{border:0;background:var(--accent);color:var(--accent-fg);font-weight:700;padding:0 22px;cursor:pointer;font:inherit;font-weight:700}
+.actions{display:flex;gap:6px;align-items:center}
+.actions a{display:flex;align-items:center;gap:6px;padding:8px 10px;border-radius:8px;font-weight:500;font-size:14px}
+.actions a:hover{background:var(--surface)}
+.actions svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
+.catbar{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:thin}
+.catbar ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;white-space:nowrap}
+.catbar a{display:block;padding:13px 14px;font-weight:500;font-size:14px;border-bottom:3px solid transparent}
+.catbar a:hover{border-bottom-color:var(--accent)}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;margin-top:24px;align-items:stretch}
+.hero-copy{background:var(--accent);color:var(--accent-fg);border-radius:14px;padding:clamp(24px,4vw,52px);display:flex;flex-direction:column;gap:18px;justify-content:center;min-width:0}
+.hero-copy .eyebrow{font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.hero-copy h1{font-size:clamp(34px,5.2vw,64px);font-weight:800;line-height:.98;letter-spacing:-.035em}
+.hero-copy p{margin:0;max-width:44ch;font-size:17px}
+.btn{display:inline-block;background:#1c1a16;color:#fff;font-weight:700;padding:14px 26px;border-radius:999px;width:fit-content}
+.btn:hover{transform:translateY(-1px)}
+.hero-art{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:12px;min-width:0}
+.hero-art .tile{min-height:140px}
+.tile{border-radius:12px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;min-width:0;position:relative}
+.tile .pun{font-family:var(--font-display);font-weight:800;line-height:1.02;letter-spacing:-.02em;font-size:clamp(17px,2.2vw,26px);overflow-wrap:anywhere}
+.tile .kind{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.75}
+.c1{background:var(--t1);color:#1c1a16}.c2{background:var(--t2);color:#f4b400}.c3{background:var(--t3);color:#1c1a16}
+.c4{background:var(--t4);color:#fff}.c5{background:var(--t5);color:var(--fg)}.c6{background:var(--t6);color:#14263d}
+section{margin-top:48px}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(24px,3vw,34px);font-weight:800;letter-spacing:-.025em}
+.sec-head a{font-weight:700;border-bottom:2px solid var(--accent)}
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cat{background:var(--surface);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:14px;min-width:0;border:1px solid var(--line)}
+.cat:hover{border-color:var(--fg)}
+.cat .swatch{aspect-ratio:3/2;border-radius:8px;max-width:100%;display:flex;align-items:flex-end;padding:10px}
+.cat .swatch span{font-family:var(--font-display);font-weight:800;font-size:15px;line-height:1.05}
+.cat h3{font-size:18px;font-weight:700}
+.cat p{margin:0;color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px 16px}
+.card{display:flex;flex-direction:column;gap:10px;min-width:0}
+.card .tile{aspect-ratio:1/1;padding:18px}
+.card:hover .tile{transform:translateY(-3px)}
+.tile{transition:transform .15s}
+.card .name{font-weight:700;font-size:15px;line-height:1.25}
+.card .meta{display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--muted);font-size:13px}
+.price{color:var(--fg);font-weight:700;font-size:15px;font-variant-numeric:tabular-nums}
+.heart{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.9);display:grid;place-items:center;border:0;cursor:pointer;color:#1c1a16}
+.heart svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.note{font-size:12px;color:var(--muted);margin-top:14px}
+.band{background:var(--surface);border-radius:14px;padding:clamp(22px,4vw,44px);display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center}
+.band h2{font-size:clamp(26px,3.4vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1.02}
+.band p{color:var(--muted);margin:12px 0 18px;max-width:48ch}
+.pricelist{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.pricelist li{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);font-variant-numeric:tabular-nums}
+.pricelist b{font-weight:700}
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:26px}
+.trust div{display:flex;flex-direction:column;gap:4px;min-width:0}
+.trust b{font-family:var(--font-display);font-size:17px}
+.trust span{color:var(--muted);font-size:13px}
+footer{margin-top:48px;padding-block:32px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px;color:var(--muted);font-size:14px}
+footer h4{margin:0 0 10px;color:var(--fg);font-family:var(--font-display);font-size:15px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+footer .logo{color:var(--fg);margin-bottom:10px}
+.copy{border-top:1px solid var(--line);padding-block:18px;font-size:12px;color:var(--muted)}
+@media (max-width:900px){
+  .hero,.band{grid-template-columns:1fr}
+  .cats,.grid{grid-template-columns:repeat(2,1fr)}
+  .trust{grid-template-columns:repeat(2,1fr)}
+  footer{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  header.top{grid-template-columns:1fr auto;gap:12px}
+  form.search{grid-column:1/-1;order:3}
+  .actions a span{display:none}
+  .logo{font-size:24px}
+}
+@media (prefers-reduced-motion:reduce){.tile,.btn{transition:none}.btn:hover,.card:hover .tile{transform:none}}
+</style>
+
+<div class="promo">Better than flowers: custom gifts from 1 piece. Cards, mugs, tumblers and more.</div>
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="#top" aria-label="Punny Crafts home"><span>Punny</span>Crafts</a>
+    <form class="search" id="searchForm" role="search">
+      <input id="q" type="search" placeholder="Search cards, mugs, magnets, hoodies..." aria-label="Search products">
+      <button type="submit">Search</button>
+    </form>
+    <nav class="actions" aria-label="Account">
+      <a href="#wishlist"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span>Wishlist</span></a>
+      <a href="#cart"><svg viewBox="0 0 24 24"><path d="M4 5h2l2 10h9l2-7H7"/><circle cx="9" cy="19" r="1.2"/><circle cx="17" cy="19" r="1.2"/></svg><span>Cart (0)</span></a>
+    </nav>
+  </header>
+  <nav class="catbar" aria-label="Categories">
+    <ul>
+      <li><a href="#shop">Papergoods</a></li><li><a href="#shop">Accessories</a></li><li><a href="#shop">Message Jars</a></li>
+      <li><a href="#shop">Drinkware</a></li><li><a href="#shop">Books &amp; Stationery</a></li><li><a href="#shop">Apparel &amp; Textiles</a></li>
+      <li><a href="#shop">Complimentaries</a></li><li><a href="#shop">Gift Packaging</a></li><li><a href="#custom">Custom &amp; Bulk</a></li>
+    </ul>
+  </nav>
+
+  <main id="top">
+    <div class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Kenyan wordplay, made real</div>
+        <h1>Puns you can hold, gift and show off.</h1>
+        <p>Greeting cards, mugs, tumblers, magnets and hoodies that say it the way we say it. Pick a design or send us your own.</p>
+        <a class="btn" href="#shop">Shop all products</a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="tile c2"><span class="kind">Fridge magnet</span><span class="pun">Siku njema huonekana pesa ikiingia</span></div>
+        <div class="tile c3"><span class="kind">Greeting card</span><span class="pun">You matatu me</span></div>
+        <div class="tile c6"><span class="kind">Ceramic mug</span><span class="pun">Hii kikombe si ya wageni</span></div>
+        <div class="tile c4"><span class="kind">Bookmark</span><span class="pun">Nimekumark!</span></div>
+      </div>
+    </div>
+
+    <section id="categories">
+      <div class="sec-head"><h2>Shop by category</h2><a href="#shop">View all</a></div>
+      <div class="cats" id="cats"></div>
+    </section>
+
+    <section id="shop">
+      <div class="sec-head"><h2>Best sellers</h2><a href="#shop">View all</a></div>
+      <div class="grid" id="best"></div>
+      <p class="note">Placeholder artwork shows each design's wording. Product photos will replace these tiles.</p>
+    </section>
+
+    <section id="custom">
+      <div class="band">
+        <div>
+          <h2>Your name, your photo, your design.</h2>
+          <p>Personalise a card, mug, keyholder or pin from a single piece. Bookmarks, Sunny Rays and fridge magnets start at 10. Ask our sales team for bulk and wholesale rates.</p>
+          <a class="btn" href="#custom">Start a custom order</a>
+        </div>
+        <ul class="pricelist" aria-label="Customisation prices">
+          <li><span>Personalise a greeting card</span><b>+ KSh 200</b></li>
+          <li><span>Branding on your own item</span><b>from KSh 300</b></li>
+          <li><span>Design, concept and ideation</span><b>from KSh 5,000</b></li>
+          <li><span>Storage (7 days)</span><b>KSh 100</b></li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><h2>Gifts under KSh 1,000</h2><a href="#shop">View all</a></div>
+      <div class="grid" id="cheap"></div>
+    </section>
+
+    <section>
+      <div class="trust">
+        <div><b>Custom from 1 piece</b><span>Cards, mugs, pins, keyholders and more.</span></div>
+        <div><b>Bulk and wholesale</b><span>Quotes from our sales team.</span></div>
+        <div><b>Gift wrapping and letters</b><span>We wrap it and write the note.</span></div>
+        <div><b>Delivery</b><span>Charged per our delivery fees.</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><div class="logo"><span>Punny</span>Crafts</div><div>Punny gifts, proudly Kenyan.<br>+254 708 675 086</div></div>
+    <div><h4>Shop</h4><ul><li>Papergoods</li><li>Drinkware</li><li>Apparel</li><li>Gift packaging</li></ul></div>
+    <div><h4>Services</h4><ul><li>Branding</li><li>Bulk printing</li><li>Design and ideation</li><li>Sourcing</li></ul></div>
+    <div><h4>Help</h4><ul><li>Contact us</li><li>Delivery</li><li>Wholesale</li></ul></div>
+  </footer>
+  <div class="copy">Copyright Punny Crafts Limited</div>
+</div>
+
+<script>
+var CATS=[
+ ["Papergoods","Cards, postcards, bookmarks, Sunny Rays, polaroids","c1","Nakupenda kama chai"],
+ ["Accessories","Magnets, pins, keyholders, mousepads","c2","Anyway pesa hurudi"],
+ ["Message Jars","Gratitude, prayer, memory and wish jars","c3","Jar of love"],
+ ["Drinkware","Mugs, tumblers, flasks, glassware","c6","Sip happens"],
+ ["Books &amp; Stationery","Notebooks, scrapbooks, pens","c5","Purfectionist"],
+ ["Apparel &amp; Textiles","T-shirts, hoodies, hats, aprons","c4","Pawsitive vibes"],
+ ["Complimentaries","Chocolate, candles, tipsy pundit","c3","Burning for you"],
+ ["Gift Packaging","Boxes, bags, ribbon, envelopes","c1","Wrapped with love"]
+];
+var P=[
+ ["Fridge magnet","Siku njema huonekana pesa ikiingia",200,"c1"],
+ ["Greeting card","You matatu me",300,"c3"],
+ ["Ceramic mug","Hii kikombe si ya wageni",900,"c6"],
+ ["Thermal tumbler","Kubali kupendwa",2000,"c2"],
+ ["Notebook","Kusettle achia vumbi",1300,"c5"],
+ ["Hoodie","K for kuomoka is constant",3200,"c4"],
+ ["Bucket hat","No kugeria mani",1200,"c1"],
+ ["Scented candle","Burning for you",3200,"c3"],
+ ["Bookmark","Nimekumark!",100,"c4"],
+ ["Pin-back button","Anyway pesa hurudi",200,"c2"],
+ ["Sunny Ray","I'm bananas about you",50,"c1"],
+ ["Message jar (small)","Gratitude jar",500,"c5"],
+ ["Chocolate bar","To the only bean in my githeri",700,"c3"],
+ ["Wooden keyholder","Wewe ni mali safi",450,"c6"],
+ ["Greeting card","Thank you berry much",300,"c4"],
+ ["Polaroids (10)","Memories, printed",400,"c2"]
+];
+var heart='<svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
+function fmt(n){return "KSh "+n.toLocaleString("en-KE")}
+function card(p){
+  return '<a class="card" href="#shop"><div class="tile '+p[3]+'"><button class="heart" type="button" aria-label="Add to wishlist">'+heart+'</button><span class="kind">'+p[0]+'</span><span class="pun">'+p[1]+'</span></div>'+
+    '<div class="name">'+p[1]+'</div><div class="meta"><span>'+p[0]+'</span><span class="price">'+fmt(p[2])+'</span></div></a>';
+}
+document.getElementById("cats").innerHTML=CATS.map(function(c){
+  return '<a class="cat" href="#shop"><div class="swatch '+c[2]+'"><span>'+c[3]+'</span></div><h3>'+c[0]+'</h3><p>'+c[1]+'</p></a>';
+}).join("");
+document.getElementById("best").innerHTML=P.slice(0,8).map(card).join("");
+document.getElementById("cheap").innerHTML=P.slice(8).filter(function(p){return p[2]<1000}).slice(0,8).map(card).join("");
+document.getElementById("searchForm").addEventListener("submit",function(e){e.preventDefault()});
+document.querySelectorAll(".heart").forEach(function(b){b.addEventListener("click",function(e){e.preventDefault();b.style.background="#f4b400"})});
+</script>
